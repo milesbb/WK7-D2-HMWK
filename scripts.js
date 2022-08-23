@@ -35,6 +35,16 @@ const setQuery = num => {
 
 const picID = document.querySelectorAll(".text-muted")
 
+const tempAlert = (msg,duration) => {
+ var el = document.createElement("div");
+ el.setAttribute("style","position:fixed;top:0;left:50%;background-color:white;");
+ el.innerHTML = msg;
+ setTimeout(function(){
+  el.parentNode.removeChild(el);
+ },duration);
+ document.body.appendChild(el);
+}
+
 const loadPictures = (query) => {
   fetch("https://api.pexels.com/v1/search?query=" + query, options)
     .then((response) => response.json())
@@ -61,9 +71,21 @@ const loadPictures = (query) => {
         }
       }
       notBeenClicked = false;
-
+      tempAlert((pictures.length.toString() + " images loaded, 9 displayed, query: " + query), 5000);
     })
     .catch((err) => {
       console.log("ERROR:", err.message);
     });
 };
+
+const CAROUSEL_IMAGES = document.querySelectorAll(".carousel-item > img");
+
+fetch("https://api.pexels.com/v1/search?query=forest", options)
+    .then((response) => response.json())
+    .then((data) => {
+        const forestPics = data.photos;
+        for (let i = 0; i < CAROUSEL_IMAGES.length; i++) {
+            CAROUSEL_IMAGES[i].src = forestPics[i].src.landscape;
+        }
+    })
+    .catch((err) => {console.log("Error:", err.message)});
