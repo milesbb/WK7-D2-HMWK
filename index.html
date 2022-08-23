@@ -195,6 +195,15 @@
             them in a cool way!
           </p>
           <p>
+            <div class="input-group">
+              <input type="text" class="form-control" id="queryInput" placeholder="Enter a query for the photos!" aria-label="Photo queries" aria-describedby="basic-addon2">
+              <div class="input-group-append">
+                <button class="btn btn-outline-secondary" type="button" onclick="setQuery(1);">Set Query 1</button>
+                <button class="btn btn-outline-secondary" type="button" onclick="setQuery(2);">Set Query 2</button>
+              </div>
+            </div>
+          </p>
+          <p>
             <a href="#" class="btn btn-primary my-2" onclick="loadPictures(queryPrimary);">Load Images</a>
             <a href="#" class="btn btn-secondary my-2" onclick="loadPictures(querySecondary);">Load Secondary Images</a>
           </p>
