@@ -64,6 +64,21 @@ const loadPictures = (query) => {
       const pictures = data.photos;
       console.log(pictures);
 
+      let URLArray = pictures.map((pics) => {
+        return pics.url;
+      });
+      let IDArray = pictures.map((pics) => {
+        return pics.id;
+      });
+
+      console.log("URL Array: ", URLArray);
+      console.log("ID Array: ", IDArray);
+      let totalID = IDArray.reduce(
+        (previousValue, currentValue) => previousValue + currentValue,
+        0
+      );
+      console.log("Sum of all ID's: " + totalID.toString());
+
       if (notBeenClicked) {
         const CARD_IMGS = document.querySelectorAll("svg");
         for (let i = 1; i < CARD_IMGS.length; i++) {
@@ -71,7 +86,7 @@ const loadPictures = (query) => {
           NEW_IMAGE.src = pictures[i].src.medium;
           picID[i + 1].innerHTML = pictures[i].id.toString();
           CARD_IMGS[i].parentNode.replaceChild(NEW_IMAGE, CARD_IMGS[i]);
-          viewButtons[i-1].addEventListener("click", () => {
+          viewButtons[i - 1].addEventListener("click", () => {
             MODAL_IMAGE.src = NEW_IMAGE.src;
           });
         }
